@@ -7,10 +7,6 @@ const cartReducer = (state, action) => {
       );
 
       if (updatedItemIndex < 0) {
-        // return {
-        //   ...state,
-        //   cart: [...state.cart, { ...action.payload, quantity: 1 }],
-        // };
         updatedCart.push({ ...action.payload, quantity: 1 });
       } else {
         const updatedItem = { ...updatedCart[updatedItemIndex] };
