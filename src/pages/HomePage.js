@@ -12,6 +12,7 @@ const HomePage = () => {
   return (
     <Layout>
       <main className="container">
+
         <section className="productList">
           {data.products.map((product) => {
             return (
