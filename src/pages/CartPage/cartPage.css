@@ -45,22 +45,54 @@
   width: 30%;
 }
 
-button {
-  margin-left: 5px;
+.cartSummery h2 {
+  margin-bottom: 20px;
 }
 
-.cartSummery h2{
-margin-bottom: 20px;
-}
-
-.summeryItem{
+.summeryItem {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 10px;
 }
 
-.summeryItem.net{
+.summeryItem.net {
   border-top: 1px solid #ccc;
   padding-top: 5px;
+}
+
+.btnGroup button {
+  outline: none;
+  padding: 5px 10px;
+  border: 1px solid #6d289d;
+  color: #6d289d;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.btnGroup button:first-child {
+  border-radius: 5px 0 0 5px;
+}
+
+.btnGroup button:last-child {
+  border-radius: 0 5px 5px 0;
+}
+
+.btnGroup button:nth-child(2) {
+  border-left: 0;
+  border-right: 0;
+  cursor: auto;
+}
+
+.cartSummery a {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.cartSummery a button {
+  padding: 10px;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
 }
