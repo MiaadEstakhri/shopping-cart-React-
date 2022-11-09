@@ -1,0 +1,31 @@
+label {
+  display: flex;
+  margin-bottom: 5px;
+  font-weight: 800;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="password"] {
+  width: 400px;
+  padding: 6px 12px;
+  display: block;
+  background-color: #fff;
+  color: #444;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.formControl {
+  margin-bottom: 20px;
+}
+
+.error {
+  color: #ce1f1f;
+}
+
+input:focus {
+  outline: none;
+  border: 2px solid #6d28d9 ;
+}
