@@ -20,6 +20,12 @@
 
 .mainNavigation li {
   margin: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.mainNavigation .cartLink {
+  position: relative;
 }
 
 .mainNavigation a {
@@ -32,4 +38,19 @@
 .activated {
   background: #fff;
   color: #6d28d9;
+}
+
+.mainNavigation span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -9px;
+  right: -12px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #6d28d9;
+  color: #fff;
+  font-size: 14px;
 }
