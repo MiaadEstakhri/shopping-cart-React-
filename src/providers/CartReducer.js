@@ -17,7 +17,7 @@ const cartReducer = (state, action) => {
       return {
         ...state,
         cart: updatedCart,
-        total: state.total + action.payload.price,
+        total: state.total + action.payload.offPrice,
       };
     }
 
@@ -34,7 +34,7 @@ const cartReducer = (state, action) => {
         return {
           ...state,
           cart: filteredCart,
-          total: state.total - action.payload.price,
+          total: state.total - action.payload.offPrice,
         };
       } else {
         updatedItem.quantity--;
@@ -43,7 +43,7 @@ const cartReducer = (state, action) => {
       return {
         ...state,
         cart: updatedCart,
-        total: state.total - action.payload.price,
+        total: state.total - action.payload.offPrice,
       };
     }
 

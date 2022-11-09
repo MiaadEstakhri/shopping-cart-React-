@@ -49,3 +49,18 @@ button {
   margin-left: 5px;
 }
 
+.cartSummery h2{
+margin-bottom: 20px;
+}
+
+.summeryItem{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.summeryItem.net{
+  border-top: 1px solid #ccc;
+  padding-top: 5px;
+}
