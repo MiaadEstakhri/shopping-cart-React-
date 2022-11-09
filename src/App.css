@@ -35,20 +35,26 @@
 .productDesc {
   display: flex;
   justify-content: space-between;
-  padding: 15px;
+  align-items: center;
+  padding: 10px;
   width: 100%;
   border-top: 1px solid #ccc;
-  /* background:#f6f6f6; */
+  background: #ede9fe;
+}
+
+.productDesc {
+  font-weight: bold;
 }
 
 .btn {
   border: none;
   outline: none;
   border-radius: 5px;
-  padding: 8px 15px;
+  padding: 5px 10px;
   color: #6d28d9;
   background: #ede9fe;
   cursor: pointer;
+  font-size: 12px;
 }
 
 .primary {
