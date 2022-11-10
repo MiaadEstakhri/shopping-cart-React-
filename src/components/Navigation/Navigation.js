@@ -14,7 +14,7 @@ const Navigation = () => {
               to="/"
               className={({ isActive }) => (isActive ? " activated" : "")}
             >
-              home
+              Home
             </NavLink>
           </li>
           <li className="cartLink">
@@ -22,7 +22,7 @@ const Navigation = () => {
               to="/cart"
               className={({ isActive }) => (isActive ? " activated" : "")}
             >
-              cart
+              Cart
             </NavLink>
             <span>{cart.length}</span>
           </li>

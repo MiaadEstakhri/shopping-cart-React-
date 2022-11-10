@@ -1,11 +1,11 @@
 import "./input.css";
 
-const Input = ({ label, name, formik, type = "text" }) => {
+const Input = ({ label, name, formik, type }) => {
   return (
     <div className="formControl">
       <label htmlFor={"name"}>{label}</label>
       <input
-        type="text"
+        type={type}
         id={name}
         {...formik.getFieldProps(name)}
         name={name}
