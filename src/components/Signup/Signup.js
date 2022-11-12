@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { signupUser } from "../../services/signupService";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { useAuthAction } from "../../providers/AuthProvider";
 
 const initialValues = {
   name: "",
@@ -38,6 +39,7 @@ const validationSchema = Yup.object({
 });
 
 const SignupForm = () => {
+  const setAuth = useAuthAction();
   const [error, setError] = useState(null);
   const history = useNavigate();
 
@@ -51,7 +53,10 @@ const SignupForm = () => {
       password,
     };
     try {
-      await signupUser(userData);
+      const data  = await signupUser(userData);
+      setAuth(data);
+      // localStorage.setItem("authState", JSON.stringify(data));
+      setError(null);
       toast.success("Registration is done");
       history("/");
     } catch (error) {

@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../services/loginService";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { useAuthAction } from "../../providers/AuthProvider";
 
 const initialValues = {
   email: "",
@@ -20,12 +21,16 @@ const validationSchema = Yup.object({
 });
 
 const LoginForm = () => {
+  const setAuth = useAuthAction();
   const history = useNavigate();
   const [error, setError] = useState(null);
+
   const onSubmit = async (values) => {
     // console.log(values);
     try {
-      await loginUser(values);
+      const data  = await loginUser(values);
+      setAuth(data);
+      // localStorage.setItem("authState", JSON.stringify(data));
       setError(null);
       toast.success("ok");
       history("/");

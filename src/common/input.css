@@ -1,3 +1,8 @@
+.formControl {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
 label {
   display: flex;
   margin-bottom: 5px;
@@ -8,17 +13,13 @@ input[type="text"],
 input[type="tel"],
 input[type="email"],
 input[type="password"] {
-  width: 35vw;
+  width: 30vw;
   padding: 6px 12px;
   display: block;
   background-color: #fff;
   color: #444;
   border: 1px solid #ccc;
   border-radius: 4px;
-}
-
-.formControl {
-  margin-bottom: 20px;
 }
 
 .error {
