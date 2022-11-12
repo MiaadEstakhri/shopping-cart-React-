@@ -43,7 +43,6 @@ const LoginForm = () => {
     enableReinitialize: true,
   });
 
-
   return (
     <section className="formContainer">
       <form onSubmit={formik.handleSubmit}>
