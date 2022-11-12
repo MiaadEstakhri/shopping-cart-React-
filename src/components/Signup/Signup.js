@@ -3,6 +3,9 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./signup.css";
 import { Link } from "react-router-dom";
+import { signupUser } from "../../services/signupService";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 const initialValues = {
   name: "",
@@ -10,14 +13,6 @@ const initialValues = {
   phoneNumber: "",
   password: "",
   passwordConfirm: "",
-};
-
-const onSubmit = (values) => {
-  console.log(values);
-  // axios
-  //   .post("http://localhost:3001/users", values)
-  //   .then((res) => console.log(res.data))
-  //   .catch((err) => console.log(err));
 };
 
 const validationSchema = Yup.object({
@@ -43,6 +38,27 @@ const validationSchema = Yup.object({
 });
 
 const SignupForm = () => {
+  const [error, setError] = useState(null);
+  const onSubmit = async (values) => {
+    const { name, email, phoneNumber, password } = values;
+    // console.log(values);
+    const userData = {
+      name,
+      email,
+      phoneNumber,
+      password,
+    };
+    try {
+      await signupUser(userData);
+      toast.success("ok");
+    } catch (error) {
+      console.log(error);
+      if (error.response && error.response.data.message)
+        setError(error.response.data.message);
+      toast.error(`error is : ${error.response.data.message}`);
+    }
+  };
+
   const formik = useFormik({
     initialValues,
     onSubmit,
@@ -50,6 +66,7 @@ const SignupForm = () => {
     validateOnMount: true,
     enableReinitialize: true,
   });
+
 
   return (
     <section className="formContainer">
@@ -81,6 +98,7 @@ const SignupForm = () => {
         >
           Signup
         </button>
+        {/* {error && <p style={{ color: "red" }}>error is : {error}</p>} */}
         <Link to="/login">
           <p>Already login ?</p>
         </Link>

@@ -3,18 +3,13 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./login.css";
 import { Link } from "react-router-dom";
+import { loginUser } from "../../services/loginService";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 const initialValues = {
   email: "",
   password: "",
-};
-
-const onSubmit = (values) => {
-  console.log(values);
-  // axios
-  //   .post("http://localhost:3001/users", values)
-  //   .then((res) => console.log(res.data))
-  //   .catch((err) => console.log(err));
 };
 
 const validationSchema = Yup.object({
@@ -25,6 +20,21 @@ const validationSchema = Yup.object({
 });
 
 const LoginForm = () => {
+  const [error, setError] = useState(null);
+  const onSubmit = async (values) => {
+    // console.log(values);
+    try {
+      await loginUser(values);
+      setError(null);
+      toast.success("ok");
+    } catch (error) {
+      console.log(error);
+      if (error.response && error.response.data.message)
+        setError(error.response.data.message);
+      toast.error(`error is : ${error.response.data.message}`);
+    }
+  };
+
   const formik = useFormik({
     initialValues,
     onSubmit,
@@ -32,6 +42,7 @@ const LoginForm = () => {
     validateOnMount: true,
     enableReinitialize: true,
   });
+
 
   return (
     <section className="formContainer">
@@ -50,6 +61,7 @@ const LoginForm = () => {
         >
           Login
         </button>
+        {/* {error && <p style={{ color: "red" }}>error is : {error}</p>} */}
         <Link to="/signup">
           <p>Not signup yet ?</p>
         </Link>

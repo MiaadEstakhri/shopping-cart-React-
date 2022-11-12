@@ -1,0 +1,25 @@
+###
+GET https://nodejs-post-app.herokuapp.com/api/product HTTP/1.1
+
+
+###
+
+POST https://nodejs-post-app.herokuapp.com/api/user/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": "miaad.test4@gmail.com",
+    "password": "12345689"
+}
+
+###
+
+POST https://nodejs-post-app.herokuapp.com/api/user/register HTTP/1.1
+content-type: application/json
+
+{
+    "email": "miaad.test4@gmail.com",
+    "password": "12345689",
+    "name":"wahed m",
+    "phoneNumber":"09123456784"
+}
