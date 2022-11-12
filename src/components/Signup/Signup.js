@@ -2,7 +2,7 @@ import Input from "../../common/Input";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./signup.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signupUser } from "../../services/signupService";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -39,6 +39,8 @@ const validationSchema = Yup.object({
 
 const SignupForm = () => {
   const [error, setError] = useState(null);
+  const history = useNavigate();
+
   const onSubmit = async (values) => {
     const { name, email, phoneNumber, password } = values;
     // console.log(values);
@@ -50,7 +52,8 @@ const SignupForm = () => {
     };
     try {
       await signupUser(userData);
-      toast.success("ok");
+      toast.success("Registration is done");
+      history("/");
     } catch (error) {
       console.log(error);
       if (error.response && error.response.data.message)
@@ -66,7 +69,6 @@ const SignupForm = () => {
     validateOnMount: true,
     enableReinitialize: true,
   });
-
 
   return (
     <section className="formContainer">

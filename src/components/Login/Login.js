@@ -2,7 +2,7 @@ import Input from "../../common/Input";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./login.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../services/loginService";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -20,6 +20,7 @@ const validationSchema = Yup.object({
 });
 
 const LoginForm = () => {
+  const history = useNavigate();
   const [error, setError] = useState(null);
   const onSubmit = async (values) => {
     // console.log(values);
@@ -27,6 +28,7 @@ const LoginForm = () => {
       await loginUser(values);
       setError(null);
       toast.success("ok");
+      history("/");
     } catch (error) {
       console.log(error);
       if (error.response && error.response.data.message)
