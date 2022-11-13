@@ -4,9 +4,10 @@ import * as Yup from "yup";
 import "./login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../services/loginService";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { useAuthAction } from "../../providers/AuthProvider";
+import { useAuth, useAuthAction } from "../../providers/AuthProvider";
+import { useQuery } from "../../hooks/useQuaery";
 
 const initialValues = {
   email: "",
@@ -22,18 +23,25 @@ const validationSchema = Yup.object({
 
 const LoginForm = () => {
   const setAuth = useAuthAction();
+  const auth = useAuth();
   const history = useNavigate();
   const [error, setError] = useState(null);
+  let query = useQuery();
+  const redirect = query.get("redirect");
+
+  useEffect(() => {
+    if (auth) history("/checkout");
+  }, [redirect, auth]);
 
   const onSubmit = async (values) => {
     // console.log(values);
     try {
-      const data  = await loginUser(values);
+      const data = await loginUser(values);
       setAuth(data);
       // localStorage.setItem("authState", JSON.stringify(data));
       setError(null);
       toast.success("ok");
-      history("/");
+      history("/checkout");
     } catch (error) {
       console.log(error);
       if (error.response && error.response.data.message)
@@ -47,7 +55,6 @@ const LoginForm = () => {
     onSubmit,
     validationSchema,
     validateOnMount: true,
-    enableReinitialize: true,
   });
 
   return (
@@ -68,7 +75,7 @@ const LoginForm = () => {
           Login
         </button>
         {/* {error && <p style={{ color: "red" }}>error is : {error}</p>} */}
-        <Link to="/signup">
+        <Link to={`/signup?redirect=${redirect}`}>
           <p>Not signup yet ?</p>
         </Link>
       </form>

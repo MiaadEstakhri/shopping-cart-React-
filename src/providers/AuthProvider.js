@@ -11,7 +11,10 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const userData =
       JSON.parse(localStorage.getItem(LOCAL_STORAGE_AUTH_STATE)) || false;
-    setState(userData);
+      if (userData) {
+        setState(userData);
+       }
+    
   }, []);
 
   useEffect(() => {

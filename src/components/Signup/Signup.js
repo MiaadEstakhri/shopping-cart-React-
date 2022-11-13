@@ -4,9 +4,10 @@ import * as Yup from "yup";
 import "./signup.css";
 import { Link, useNavigate } from "react-router-dom";
 import { signupUser } from "../../services/signupService";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { useAuthAction } from "../../providers/AuthProvider";
+import { useAuth, useAuthAction } from "../../providers/AuthProvider";
+import { useQuery } from "../../hooks/useQuaery";
 
 const initialValues = {
   name: "",
@@ -40,8 +41,15 @@ const validationSchema = Yup.object({
 
 const SignupForm = () => {
   const setAuth = useAuthAction();
+  const auth = useAuth();
   const [error, setError] = useState(null);
   const history = useNavigate();
+  const query = useQuery();
+  const redirect = query.get("redirect");
+
+  useEffect(() => {
+    if (auth) history("/checkout");
+  }, [redirect, auth]);
 
   const onSubmit = async (values) => {
     const { name, email, phoneNumber, password } = values;
@@ -53,14 +61,14 @@ const SignupForm = () => {
       password,
     };
     try {
-      const data  = await signupUser(userData);
+      const data = await signupUser(userData);
       setAuth(data);
       // localStorage.setItem("authState", JSON.stringify(data));
       setError(null);
       toast.success("Registration is done");
-      history("/");
+      history("/checkout");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       if (error.response && error.response.data.message)
         setError(error.response.data.message);
       toast.error(`error is : ${error.response.data.message}`);
@@ -72,7 +80,6 @@ const SignupForm = () => {
     onSubmit,
     validationSchema,
     validateOnMount: true,
-    enableReinitialize: true,
   });
 
   return (
@@ -106,7 +113,7 @@ const SignupForm = () => {
           Signup
         </button>
         {/* {error && <p style={{ color: "red" }}>error is : {error}</p>} */}
-        <Link to="/login">
+        <Link to={`/login?redirect=${redirect}`}>
           <p>Already login ?</p>
         </Link>
       </form>
