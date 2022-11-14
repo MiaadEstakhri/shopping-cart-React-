@@ -61,3 +61,22 @@
   color: #fff;
   font-size: 14px;
 }
+
+.userIcon,
+.shoppingIcon {
+  font-size: 1.5rem;
+}
+
+li h1 {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: #6d28d9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logoIcon {
+  font-size: 2rem;
+}

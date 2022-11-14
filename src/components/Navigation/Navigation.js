@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../providers/AuthProvider";
 import { useCart } from "../../providers/CartProvider";
+import { FaUserCircle, FaShoppingCart } from "react-icons/fa";
+import { GiRunningShoe } from "react-icons/gi";
 import "./navigation.css";
 
 const Navigation = () => {
@@ -11,7 +13,11 @@ const Navigation = () => {
       <nav>
         <div>
           <ul>
-            <li>Shopping</li>
+            <li>
+              <h1>
+                <GiRunningShoe className="logoIcon" />
+              </h1>
+            </li>
             <li>
               <NavLink
                 to="/"
@@ -29,7 +35,7 @@ const Navigation = () => {
                 to="/cart"
                 className={({ isActive }) => (isActive ? " activated" : "")}
               >
-                Cart
+                <FaShoppingCart className="shoppingIcon" />
               </NavLink>
               <span>{cart.length}</span>
             </li>
@@ -38,7 +44,11 @@ const Navigation = () => {
                 to={userData ? "/profile" : "/login"}
                 className={({ isActive }) => (isActive ? " activated" : "")}
               >
-                {userData ? "profile" : "Login /Signup"}
+                {userData ? (
+                  <FaUserCircle className="userIcon" />
+                ) : (
+                  "Login /Signup"
+                )}
               </NavLink>
             </li>
           </ul>
