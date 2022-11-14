@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import Layout from "../../Layout/Layout";
 import { useCart, useCartActions } from "../../providers/CartProvider";
+import { MdDelete } from "react-icons/md";
 import "./cartPage.css";
 
 const CartPage = () => {
@@ -39,7 +40,9 @@ const CartPage = () => {
                   <div>{item.name}</div>
                   <div> $ {item.offPrice * item.quantity}</div>
                   <div className="btnGroup">
-                    <button onClick={() => decHandler(item)}>-</button>
+                    <button onClick={() => decHandler(item)}>
+                      {item.quantity === 1 ? <MdDelete /> : "-"}
+                    </button>
                     <button>{item.quantity}</button>
                     <button onClick={() => incHandler(item)}>+</button>
                   </div>
